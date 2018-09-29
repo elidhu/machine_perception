@@ -9,9 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": [
-                "${workspaceFolder}/practical_01/img"
-            ]
+            "cwd": "/Users/kevinglasson/Google Drive/Uni/2018/Semester 2/machine_perception/practical_03"
         },
         {
             "name": "Python: Attach",
