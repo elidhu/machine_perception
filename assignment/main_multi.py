@@ -53,9 +53,9 @@ def process(path):
             normalised), (70, 0, 0), (200, 255, 255))
 
         # create the masks for the areas where the color will be extracted
-        top_color_mask = utils.mask_from_contours(
+        top_color_mask = features.mask_from_contours(
             TOP_COLOR_CNTS, thresh.shape)
-        bot_color_mask = utils.mask_from_contours(
+        bot_color_mask = features.mask_from_contours(
             BOT_COLOR_CNTS, thresh.shape)
         # and the mask with the thresh output, hopefully stop the blacks and
         # whites messing with the average color
@@ -152,7 +152,7 @@ def main(image_paths, threaded=True):
     if threaded:
         desc = []
         # Create a pool of processes. By default, one is created for each CPU in your machine.
-        with concurrent.futures.ThreadPoolExecutor() as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
             for d in executor.map(process, image_paths):
                 desc += d
     else:
