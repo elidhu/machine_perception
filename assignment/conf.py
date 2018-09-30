@@ -11,8 +11,6 @@ COLOR_VALUES = np.array([[[89,  89, 185]],
                          [[52, 139, 191]],
                          [[60,  58,  48]]], dtype=np.uint8)
 
-# XFORM_DESTINATION = np.array([[0, 0], [0, 500],  [500, 500],
-#                               [500, 0]], dtype=np.float32)
 XFORM_DESTINATION = np.array([[250, 0], [0, 250],  [250, 500],
                               [500, 250]], dtype=np.float32)
 
@@ -140,7 +138,6 @@ CLASS_DICTIONARY = {
     '7': [
         '7'
     ]
-
 }
 
 SYMBOL_LOOKUP = {
