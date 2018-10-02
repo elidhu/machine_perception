@@ -9,7 +9,7 @@ import pytesseract
 from cv2 import cv2
 from PIL import Image
 
-from conf import (BOT_COLOR_CNTS, CLASS_CNTS, CLASS_DICTIONARY, COLOR_NAMES,
+from conf import (BOT_COLOR_CNTS, CLASS_CNTS1, CLASS_CNTS2, CLASS_DICTIONARY, COLOR_NAMES,
                   COLOR_VALUES, LABEL_CNTS, LABEL_DICTIONARY, TOP_COLOR_CNTS,
                   XFORM_DESTINATION, SYMBOL_LOOKUP)
 from mp_utils import (convert, features, filters, io, ocr, transforms, utils,
@@ -76,11 +76,13 @@ def process(path):
 
         #* EXTRACT CLASS
 
-        class_loc = utils.crop_to_contour(balanced, CLASS_CNTS)
+        class_loc1 = utils.crop_to_contour(balanced, CLASS_CNTS1)
+        class_loc2 = utils.crop_to_contour(balanced, CLASS_CNTS2)
 
-        clas = ocr.extract_all_words(class_loc, filter='NUMS')
+        clas1 = ocr.extract_all_words(class_loc1, filter='NUMS')
+        clas2 = ocr.extract_all_words(class_loc2, filter='NUMS')
 
-        label = ocr.determine_label(clas, CLASS_DICTIONARY)
+        label = ocr.determine_label(clas1 + clas2, CLASS_DICTIONARY)
 
         description['class'] = label
 
