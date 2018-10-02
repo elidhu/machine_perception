@@ -144,7 +144,7 @@ def process(path):
         #* APPEND DESCRIPTION
         descriptions.append(description)
         # print(json.dumps(description, indent=4))
-        vis.show(balanced)
+        # vis.show(balanced)
 
     return(descriptions)
 
@@ -169,6 +169,16 @@ def main(image_paths, threaded=True):
             print()
         else:
             print(i)
+
+    test = []
+    for i in desc:
+        if isinstance(i, dict):
+            test.append(i)
+
+    # dirty testing
+    from test import compare, actual
+
+    compare(test, actual)
 
 if __name__ == '__main__':
 
