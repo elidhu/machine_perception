@@ -42,7 +42,7 @@ def process(path):
         # transform the diamond to a given position
         extracted = transforms.xform(
             isolated, convert.contour_to_ptarray(diamond), XFORM_DESTINATION)
-
+        
         #* EXTRACT COLORS
         #TODO: employ some sort of white balancing and maybe kNN to improve color detection
         normalised = filters.normlise_intensity(extracted)
@@ -75,7 +75,6 @@ def process(path):
         balanced = filters.white_balance(extracted)
 
         #* EXTRACT CLASS
-        # vis.show(balanced)
 
         class_loc = utils.crop_to_contour(balanced, CLASS_CNTS)
 
@@ -144,6 +143,8 @@ def process(path):
 
         #* APPEND DESCRIPTION
         descriptions.append(description)
+        # print(json.dumps(description, indent=4))
+        vis.show(balanced)
 
     return(descriptions)
 
@@ -168,8 +169,6 @@ def main(image_paths, threaded=True):
             print()
         else:
             print(i)
-    # print(json.dumps(desc, indent=4))
-    # print(len(desc))
 
 if __name__ == '__main__':
 
@@ -177,4 +176,4 @@ if __name__ == '__main__':
     image_paths = utils.get_images_in_dir('./sample_data/SetD')
 
     # run the main method
-    main(image_paths, threaded=True)
+    main(image_paths, threaded=False)
