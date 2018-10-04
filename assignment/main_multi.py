@@ -11,7 +11,7 @@ from PIL import Image
 
 from conf import (BOT_COLOR_CNTS, CLASS_CNTS1, CLASS_CNTS2, CLASS_DICTIONARY, COLOR_NAMES,
                   COLOR_VALUES, LABEL_CNTS, LABEL_DICTIONARY, TOP_COLOR_CNTS,
-                  XFORM_DESTINATION, SYMBOL_LOOKUP)
+                  XFORM_DESTINATION, SYMBOL_LOOKUP, TEST_CNTS)
 from mp_utils import (convert, features, filters, io, ocr, transforms, utils,
                       vis, orb)
 
@@ -76,13 +76,12 @@ def process(path):
 
         #* EXTRACT CLASS
 
-        class_loc1 = utils.crop_to_contour(balanced, CLASS_CNTS1)
-        class_loc2 = utils.crop_to_contour(balanced, CLASS_CNTS2)
+        # crop to the general location of the class
+        class_crop = utils.crop_to_contour(balanced, CLASS_CNTS2)
 
-        clas1 = ocr.extract_all_words(class_loc1, filter='NUMS')
-        clas2 = ocr.extract_all_words(class_loc2, filter='NUMS')
+        words = ocr.extract_all_words(class_crop, filter='NUMS')
 
-        label = ocr.determine_label(clas1 + clas2, CLASS_DICTIONARY)
+        label = ocr.determine_label(words + l, CLASS_DICTIONARY)
 
         description['class'] = label
 
@@ -188,4 +187,4 @@ if __name__ == '__main__':
     image_paths = utils.get_images_in_dir('./sample_data/SetD')
 
     # run the main method
-    main(image_paths, threaded=False)
+    main(image_paths, threaded=True)

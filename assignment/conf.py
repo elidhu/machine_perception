@@ -29,6 +29,9 @@ CLASS_CNTS1 = [np.array(
 CLASS_CNTS2 = [np.array(
     [[190, 347], [190, 457], [310, 457], [310, 347]], dtype=np.int32)]
     
+TEST_CNTS = [np.array(
+    [[0, 300], [0, 500], [500, 500], [500, 300]], dtype=np.int32)]
+
 LABEL_DICTIONARY = {
     'FLAMMABLE GAS': [
         'FLAMMABLE',
